@@ -32,6 +32,13 @@ type Solution = {
 };
 
 const levelOneSolutions: Solution[] = [
+  {
+    id: "with-ui",
+    label: "With UI",
+    description:
+      "Simple solution with usage of use state and extra jsx for statuses",
+    children: <SolutionWithUI onSave={saveFile} />,
+  },
 ];
 
 function App() {
@@ -45,7 +52,7 @@ function App() {
           <TabsList className="grid w-full grid-cols-2">
             {levelOneSolutions.map((solution) => (
               <TabsTrigger key={solution.id} value="with-ui">
-                With UI
+                {solution.label}
               </TabsTrigger>
             ))}
           </TabsList>
