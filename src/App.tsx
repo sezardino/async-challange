@@ -1,6 +1,16 @@
 import { faker } from "@faker-js/faker";
+import { ReactNode } from "react";
+import { SolutionWithUI } from "./components/solutions/with-ui";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "./components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "./components/ui/tabs";
 
-const saveFile = () =>
+const saveFile = (): Promise<string> =>
   new Promise((res, rej) => {
     const timeToResolve = faker.number.int({ min: 1000, max: 3000 });
     const isSuccess = Math.random() > 0.5;
@@ -14,14 +24,47 @@ const saveFile = () =>
     }, timeToResolve);
   });
 
+type Solution = {
+  id: string;
+  label: string;
+  description?: string;
+  children: ReactNode;
+};
+
+const levelOneSolutions: Solution[] = [
+];
+
 function App() {
   return (
-    <div className="bg-gradient-to-r from-cyan-500 to-blue-500 h-screen w-screen">
-      <h1>Async Challange</h1>
-      <button className="bg-blue-400" onClick={() => saveFile()}>
-        Save File
-      </button>
-    </div>
+    <main className="container h-dvh py-4">
+      <h1 className="text-xl">Async Challenge</h1>
+
+      <div>
+        <h2>Level 1</h2>
+        <Tabs defaultValue={levelOneSolutions[0].id} className="w-[500px]">
+          <TabsList className="grid w-full grid-cols-2">
+            {levelOneSolutions.map((solution) => (
+              <TabsTrigger key={solution.id} value="with-ui">
+                With UI
+              </TabsTrigger>
+            ))}
+          </TabsList>
+          {levelOneSolutions.map((solution) => (
+            <TabsContent value={solution.id}>
+              <Card>
+                <CardHeader>
+                  <CardTitle>{solution.label}</CardTitle>
+                  <CardDescription>{solution.description}</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-2">
+                  {solution.children}
+                </CardContent>
+              </Card>
+            </TabsContent>
+          ))}
+        </Tabs>
+      </div>
+    </main>
   );
 }
 
