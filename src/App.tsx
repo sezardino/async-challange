@@ -13,6 +13,7 @@ import {
 } from "./components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./components/ui/tabs";
 import { cn } from "./lib/utils";
+import { LevelThreeSolution } from "./components/solutions/level-three/solution";
 
 type Solution = {
   id: string;
@@ -82,6 +83,16 @@ function App() {
         </CardHeader>
         <CardContent>
           <LevelTwoSolution />
+        </CardContent>
+      </Card>
+
+      <Card className="mt-10">
+        <CardHeader>
+          <CardTitle>Level 3</CardTitle>
+          <CardDescription></CardDescription>
+        </CardHeader>
+        <CardContent>
+          <LevelThreeSolution />
         </CardContent>
       </Card>
     </main>

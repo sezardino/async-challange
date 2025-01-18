@@ -1,0 +1,1 @@
+export const MAX_PARALLEL_REQUESTS_COUNT = 3;

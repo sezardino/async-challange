@@ -8,10 +8,9 @@ import { cn } from "@/lib/utils";
 import { Loader } from "lucide-react";
 import { ComponentPropsWithoutRef, useState } from "react";
 import { Button } from "../../ui/button";
+import { MAX_PARALLEL_REQUESTS_COUNT } from "@/const/requests";
 
 type LevelTwoSolutionProps = ComponentPropsWithoutRef<"section"> & {};
-
-const MAX_PARALLEL_REQUESTS_COUNT = 3;
 
 export const LevelTwoSolution = (props: LevelTwoSolutionProps) => {
   const { className, ...rest } = props;
