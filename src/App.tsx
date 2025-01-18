@@ -1,27 +1,101 @@
-import { faker } from "@faker-js/faker";
+import { ReactNode } from "react";
+import { saveFile } from "./api/app";
+import { SolutionWithTanstack } from "./components/solutions/level-one/with-tanstack";
+import { SolutionWithToast } from "./components/solutions/level-one/with-toast";
+import { SolutionWithUI } from "./components/solutions/level-one/with-ui";
+import { LevelTwoSolution } from "./components/solutions/level-two/solution";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "./components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "./components/ui/tabs";
+import { cn } from "./lib/utils";
+import { LevelThreeSolution } from "./components/solutions/level-three/solution";
 
-const saveFile = () =>
-  new Promise((res, rej) => {
-    const timeToResolve = faker.number.int({ min: 1000, max: 3000 });
-    const isSuccess = Math.random() > 0.5;
-    const message = isSuccess
-      ? `Success: ${faker.system.commonFileName()} saved`
-      : `Error: ${faker.system.commonFileName()} not saved`;
+type Solution = {
+  id: string;
+  label: string;
+  description?: string;
+  children: ReactNode;
+};
 
-    setTimeout(() => {
-      if (isSuccess) res(message);
-      else rej(message);
-    }, timeToResolve);
-  });
+const levelOneSolutions: Solution[] = [
+  {
+    id: "ui",
+    label: "With UI",
+    description:
+      "Simple solution with usage of use state and extra jsx for statuses",
+    children: <SolutionWithUI onSave={saveFile} />,
+  },
+  {
+    id: "toast",
+    label: "With Toast",
+    description:
+      "Like previous, but for status used toast (looks better, no ui shift)",
+    children: <SolutionWithToast onSave={saveFile} />,
+  },
+  {
+    id: "tanstack",
+    label: "With Tanstack",
+    description: "Lib like tanstack can do everything for us",
+    children: <SolutionWithTanstack />,
+  },
+];
 
 function App() {
   return (
-    <div className="bg-gradient-to-r from-cyan-500 to-blue-500 h-screen w-screen">
-      <h1>Async Challange</h1>
-      <button className="bg-blue-400" onClick={() => saveFile()}>
-        Save File
-      </button>
-    </div>
+    <main className="container h-dvh py-4">
+      <h1 className="text-xl">Async Challenge</h1>
+
+      <div className="mt-10">
+        <h2>Level 1</h2>
+        <Tabs defaultValue={levelOneSolutions[0].id}>
+          <TabsList className={cn(`grid w-full grid-cols-3 gap-2`)}>
+            {levelOneSolutions.map((solution) => (
+              <TabsTrigger key={solution.id} value={solution.id}>
+                {solution.label}
+              </TabsTrigger>
+            ))}
+          </TabsList>
+          {levelOneSolutions.map((solution) => (
+            <TabsContent asChild key={solution.id} value={solution.id}>
+              <Card>
+                <CardHeader>
+                  <CardTitle>{solution.label}</CardTitle>
+                  <CardDescription>{solution.description}</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-2">
+                  {solution.children}
+                </CardContent>
+              </Card>
+            </TabsContent>
+          ))}
+        </Tabs>
+      </div>
+
+      <Card className="mt-10">
+        <CardHeader>
+          <CardTitle>Level 2</CardTitle>
+          <CardDescription></CardDescription>
+        </CardHeader>
+        <CardContent>
+          <LevelTwoSolution />
+        </CardContent>
+      </Card>
+
+      <Card className="mt-10">
+        <CardHeader>
+          <CardTitle>Level 3</CardTitle>
+          <CardDescription></CardDescription>
+        </CardHeader>
+        <CardContent>
+          <LevelThreeSolution />
+        </CardContent>
+      </Card>
+    </main>
   );
 }
 
