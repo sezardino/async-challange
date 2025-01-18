@@ -1,50 +1,34 @@
-# React + TypeScript + Vite
+# Async Challenge App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This repository is a solution for the **Async Challenge**, implemented using **React**, **TypeScript**, **Tailwind CSS**, and **Vite**.
 
-Currently, two official plugins are available:
+## Description
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This application solves the task of handling asynchronous requests, demonstrating state management, error handling, and async operations in React. The app manages the number of concurrent requests, sorts them by creation time, and displays the status of each request.
 
-## Expanding the ESLint configuration
+The solution is divided into three levels of difficulty, each adding more functionality.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Task Description
 
-- Configure the top-level `parserOptions` property like this:
+**Task Description:**
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+Create a simple app that allows the user to save a hypothetical file to the server. When the button is clicked, a save request is sent to the server. It's important to handle possible server-side errors appropriately.
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+**Task Levels:**
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+1. **Single Request Only** — Ensure that only one request can be sent at a time. No parallel requests should be allowed.
+2. **Limit to Three Parallel Requests** — Allow up to three requests to be sent in parallel. No more than three requests should run simultaneously.
+3. **Three Parallel Requests with Feedback** — Allow up to three requests to be sent in parallel (maximum of three). Additionally, inform the user about the status of each action—whether the file was saved successfully or not.
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+## Technologies Used
+
+- **React** — A JavaScript library for building user interfaces.
+- **TypeScript** — A superset of JavaScript that adds static typing.
+- **Tailwind CSS** — A utility-first CSS framework for styling.
+- **Vite** — A next-generation front-end tool that serves the app during development with fast hot module replacement.
+
+## Features
+
+- **Request Limiting**: Ensures no more than three parallel requests are allowed at any time.
+- **Request Feedback**: Provides real-time feedback for each request, showing success or error messages.
+- **Sorting**: Requests can be sorted by their creation time in ascending or descending order.
