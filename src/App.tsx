@@ -1,8 +1,9 @@
 import { ReactNode } from "react";
 import { saveFile } from "./api/app";
-import { SolutionWithTanstack } from "./components/solutions/with-tanstack";
-import { SolutionWithToast } from "./components/solutions/with-toast";
-import { SolutionWithUI } from "./components/solutions/with-ui";
+import { SolutionWithTanstack } from "./components/solutions/level-one/with-tanstack";
+import { SolutionWithToast } from "./components/solutions/level-one/with-toast";
+import { SolutionWithUI } from "./components/solutions/level-one/with-ui";
+import { LevelTwoSolution } from "./components/solutions/level-two/solution";
 import {
   Card,
   CardContent,
@@ -48,9 +49,9 @@ function App() {
     <main className="container h-dvh py-4">
       <h1 className="text-xl">Async Challenge</h1>
 
-      <div>
+      <div className="mt-10">
         <h2>Level 1</h2>
-        <Tabs defaultValue={levelOneSolutions[0].id} className="w-[500px]">
+        <Tabs defaultValue={levelOneSolutions[0].id}>
           <TabsList className={cn(`grid w-full grid-cols-3 gap-2`)}>
             {levelOneSolutions.map((solution) => (
               <TabsTrigger key={solution.id} value={solution.id}>
@@ -73,6 +74,16 @@ function App() {
           ))}
         </Tabs>
       </div>
+
+      <Card className="mt-10">
+        <CardHeader>
+          <CardTitle>Level 2</CardTitle>
+          <CardDescription></CardDescription>
+        </CardHeader>
+        <CardContent>
+          <LevelTwoSolution />
+        </CardContent>
+      </Card>
     </main>
   );
 }

@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 import { Loader } from "lucide-react";
 import { ComponentPropsWithoutRef, useState } from "react";
-import { Button } from "../ui/button";
+import { Button } from "../../ui/button";
 
 type ResponseStatus = {
   isSuccess: boolean;

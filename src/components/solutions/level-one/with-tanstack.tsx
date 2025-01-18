@@ -2,7 +2,7 @@ import { useSaveMutation } from "@/hooks/mutations/save";
 import { cn } from "@/lib/utils";
 import { Loader } from "lucide-react";
 import { ComponentPropsWithoutRef } from "react";
-import { Button } from "../ui/button";
+import { Button } from "../../ui/button";
 
 type SolutionWithTanstackProps = ComponentPropsWithoutRef<"section"> & {};
 

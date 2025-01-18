@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils";
 import { Loader } from "lucide-react";
 import { ComponentPropsWithoutRef, useState } from "react";
 import { toast } from "sonner";
-import { Button } from "../ui/button";
+import { Button } from "../../ui/button";
 
 type SolutionWithToastProps = ComponentPropsWithoutRef<"section"> & {
   onSave: () => Promise<string>;
