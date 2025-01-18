@@ -1,5 +1,6 @@
 import { faker } from "@faker-js/faker";
 import { ReactNode } from "react";
+import { SolutionWithToast } from "./components/solutions/with-toast";
 import { SolutionWithUI } from "./components/solutions/with-ui";
 import {
   Card,
@@ -39,6 +40,13 @@ const levelOneSolutions: Solution[] = [
       "Simple solution with usage of use state and extra jsx for statuses",
     children: <SolutionWithUI onSave={saveFile} />,
   },
+  {
+    id: "with-toast",
+    label: "With Toast",
+    description:
+      "Like previous, but for status used toast (looks better, no ui shift)",
+    children: <SolutionWithToast onSave={saveFile} />,
+  },
 ];
 
 function App() {
@@ -49,15 +57,15 @@ function App() {
       <div>
         <h2>Level 1</h2>
         <Tabs defaultValue={levelOneSolutions[0].id} className="w-[500px]">
-          <TabsList className="grid w-full grid-cols-2">
+          <TabsList className="grid w-full grid-cols-2 gap-2">
             {levelOneSolutions.map((solution) => (
-              <TabsTrigger key={solution.id} value="with-ui">
+              <TabsTrigger key={solution.id} value={solution.id}>
                 {solution.label}
               </TabsTrigger>
             ))}
           </TabsList>
           {levelOneSolutions.map((solution) => (
-            <TabsContent value={solution.id}>
+            <TabsContent asChild key={solution.id} value={solution.id}>
               <Card>
                 <CardHeader>
                   <CardTitle>{solution.label}</CardTitle>
