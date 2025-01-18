@@ -1,5 +1,6 @@
-import { faker } from "@faker-js/faker";
 import { ReactNode } from "react";
+import { saveFile } from "./api/app";
+import { SolutionWithTanstack } from "./components/solutions/with-tanstack";
 import { SolutionWithToast } from "./components/solutions/with-toast";
 import { SolutionWithUI } from "./components/solutions/with-ui";
 import {
@@ -10,20 +11,7 @@ import {
   CardTitle,
 } from "./components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./components/ui/tabs";
-
-const saveFile = (): Promise<string> =>
-  new Promise((res, rej) => {
-    const timeToResolve = faker.number.int({ min: 1000, max: 3000 });
-    const isSuccess = Math.random() > 0.5;
-    const message = isSuccess
-      ? `Success: ${faker.system.commonFileName()} saved`
-      : `Error: ${faker.system.commonFileName()} not saved`;
-
-    setTimeout(() => {
-      if (isSuccess) res(message);
-      else rej(message);
-    }, timeToResolve);
-  });
+import { cn } from "./lib/utils";
 
 type Solution = {
   id: string;
@@ -34,18 +22,24 @@ type Solution = {
 
 const levelOneSolutions: Solution[] = [
   {
-    id: "with-ui",
+    id: "ui",
     label: "With UI",
     description:
       "Simple solution with usage of use state and extra jsx for statuses",
     children: <SolutionWithUI onSave={saveFile} />,
   },
   {
-    id: "with-toast",
+    id: "toast",
     label: "With Toast",
     description:
       "Like previous, but for status used toast (looks better, no ui shift)",
     children: <SolutionWithToast onSave={saveFile} />,
+  },
+  {
+    id: "tanstack",
+    label: "With Tanstack",
+    description: "Lib like tanstack can do everything for us",
+    children: <SolutionWithTanstack />,
   },
 ];
 
@@ -57,7 +51,7 @@ function App() {
       <div>
         <h2>Level 1</h2>
         <Tabs defaultValue={levelOneSolutions[0].id} className="w-[500px]">
-          <TabsList className="grid w-full grid-cols-2 gap-2">
+          <TabsList className={cn(`grid w-full grid-cols-3 gap-2`)}>
             {levelOneSolutions.map((solution) => (
               <TabsTrigger key={solution.id} value={solution.id}>
                 {solution.label}
